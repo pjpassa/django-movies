@@ -68,3 +68,7 @@ data/
 
 # direnv
 .direnv/
+
+# data
+.DS_Store
+ml-20m/
