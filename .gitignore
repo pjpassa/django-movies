@@ -62,3 +62,9 @@ target/
 data/
 *.sqlite
 *.sqlite3
+
+# PyCharm
+.idea/
+
+# direnv
+.direnv/
