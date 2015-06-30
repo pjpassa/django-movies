@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# Create your models here.
 class Rater(models.Model):
     user_id = models.IntegerField(primary_key=True)
 
@@ -11,7 +12,6 @@ class Movie(models.Model):
     genres = models.CharField(max_length=200)
 
 
-# Create your models here.
 class Link(models.Model):
     movie = models.ForeignKey(Movie)
     imdb = models.CharField(max_length=7)
