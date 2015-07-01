@@ -3,13 +3,11 @@ from django.db import models
 
 # Create your models here.
 class Rater(models.Model):
-    user_id = models.IntegerField(primary_key=True)
+    rater = models.IntegerField()
 
 
 class Movie(models.Model):
-    movie_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200)
-    genres = models.CharField(max_length=200)
 
 
 class Link(models.Model):
@@ -33,3 +31,8 @@ class Rating(models.Model):
     movie = models.ForeignKey(Movie)
     rating = models.IntegerField()
     timestamp = models.IntegerField()
+
+
+class Movie_Genre(models.Model):
+    movie = models.ForeignKey(Movie)
+    genre = models.CharField(max_length=100)
