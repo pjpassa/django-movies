@@ -38,7 +38,7 @@ class Tag(models.Model):
 class Rating(models.Model):
     rater = models.ForeignKey(Rater)
     movie = models.ForeignKey(Movie)
-    rating = models.IntegerField()
+    rating = models.FloatField()
     timestamp = models.IntegerField()
 
     def __str__(self):
