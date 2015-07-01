@@ -1,8 +1,9 @@
+import csv
 from ratings.models import Rater, Movie, Link, Tag, Rating
 
 raters = set()
 with open("../ml-20m/ratings.csv") as file:
-    lines = file.readlines()
+    csv_reader = csv.reader(file)
 
 for num, line in enumerate(lines):
     if num == 0:

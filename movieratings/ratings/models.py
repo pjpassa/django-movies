@@ -13,21 +13,21 @@ class Movie(models.Model):
 class Link(models.Model):
     movie = models.ForeignKey(Movie)
     imdb = models.CharField(max_length=7)
-    tmdb = models.IntegerField()
+    tmdb = models.CharField(max_length=7)
 
     def __str__(self):
         return str(self.movie)
 
 
 class Tag(models.Model):
-    user = models.ForeignKey(Rater)
+    rater = models.ForeignKey(Rater)
     movie = models.ForeignKey(Movie)
     tag = models.CharField(max_length=150)
     timestamp = models.IntegerField()
 
 
 class Rating(models.Model):
-    user = models.ForeignKey(Rater)
+    rater = models.ForeignKey(Rater)
     movie = models.ForeignKey(Movie)
     rating = models.IntegerField()
     timestamp = models.IntegerField()
