@@ -24,7 +24,7 @@ def import_tags():
             tag = row["tag"]
             timestamp = int(row["timestamp"])
             tagger = Rater.objects.get_or_create(rater=userId, id=userId)[0]
-            Rating.objects.create(movie=movie, tag=tag, timestamp=timestamp, rater=rater)
+            Tag.objects.create(movie=movie, tag=tag, timestamp=timestamp, rater=rater)
     raise BaseException()
 
 
