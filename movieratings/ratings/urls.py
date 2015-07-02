@@ -14,8 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
-from ratings.views import ratings_links
+from ratings.views import movie_view
 
 urlpatterns = [
-    url(r'^', ratings_links),
 ]

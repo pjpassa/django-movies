@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2>{{ movie.title }}</h2>
+    <h3>Genres</h3>
+    {% for genre in genres %}
+        <h4>{{ genre }}</h4>
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+
+    <div>{{ avg_rating }} / 5</div>
+
+    {% for rating in ratings %}
+    <div>{{ rating.rater.id }}: {{ rating.rating }} / 5</div>
+    {% endfor %}
+
+    {% for tag in tags %}
+    <div>{{tag.tag}}</div>
+    {% endfor %}
+
+
+{% endblock %}
