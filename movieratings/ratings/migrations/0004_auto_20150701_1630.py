@@ -16,16 +16,13 @@ def import_ratings(apps, schema_editor):
             rating = float(row["rating"])
             timestamp = int(row["timestamp"])
             rater = Rater.objects.get_or_create(rater=userId, id=userId)[0]
-            print(Rating.objects.create(movie=movie, rating=rating, timestamp=timestamp, rater=rater))
-            if movie.id == 253:
-                break
+            Rating.objects.create(movie=movie, rating=rating, timestamp=timestamp, rater=rater)
 
-    raise BaseException()
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ratings', '0005_auto_20150701_1441'),
+        ('ratings', '0003_auto_20150701_1612'),
     ]
 
     operations = [
