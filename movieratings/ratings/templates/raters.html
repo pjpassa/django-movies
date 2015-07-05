@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2>Rater {{ rater.id }}</h2>
+{% endblock %}
+
+{% block body %}
+
+    <h3>Average rating of {{ avg_rating }} / 5</h3>
+
+    <h3>Tags</h3>
+    {% for tag in tags %}
+        <div><a href="{% url "movie" tag.movie.id %}">{{ tag.movie.title }}</a>: {{tag.tag}}</div>
+    {% endfor %}
+
+    <h3>Ratings</h3>
+    {% for rating in ratings %}
+        <div><a href="{% url "movie" rating.movie.id %}">{{ rating.movie.title }}</a>: {{rating.rating}}</div>
+    {% endfor %}
+
+{% endblock %}

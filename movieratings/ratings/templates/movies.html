@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}
+
     <h2>{{ movie.title }}</h2>
     <h3>Genres</h3>
-    {% for genre in genres %}
-        <h4>{{ genre }}</h4>
-    {% endfor %}
+    <h4>{% for genre in genres %}
+        {{ genre.genre }}
+    {% endfor %}</h4>
+    <a href="http://www.imdb.com/title/tt{{ link.imdb }}">IMDB</a>
+    <a href="http://www.themoviedb.org/movie/{{ link.tmdb }}">TMDB</a>
+    <a href="https://movielens.org/movies/{{ link.id }}">Movie Lens</a>
+
 {% endblock %}
 
 {% block body %}
 
-    <div>{{ avg_rating }} / 5</div>
+    <h3>Average rating of {{ avg_rating }} / 5</h3>
+    <div></div>
 
-    {% for rating in ratings %}
-    <div>{{ rating.rater.id }}: {{ rating.rating }} / 5</div>
-    {% endfor %}
-
+    <h3>User Tags</h3>
     {% for tag in tags %}
-    <div>{{tag.tag}}</div>
+        <div>{{tag.tag}}</div>
     {% endfor %}
 
 {% endblock %}
