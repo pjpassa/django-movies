@@ -11,6 +11,7 @@ class Rater(models.Model):
 
 class Movie(models.Model):
     title = models.CharField(max_length=200)
+    average_rating = models.FloatField()
 
     def __str__(self):
         return self.title

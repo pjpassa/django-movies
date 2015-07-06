@@ -7,7 +7,7 @@ from statistics import mean
 def movie_view(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     ratings = Rating.objects.filter(movie=movie)
-    avg_rating = str(mean([rating.rating for rating in ratings]))[:3]
+    avg_rating = round(movie.average_rating, 1)
     genres = Movie_Genre.objects.filter(movie=movie)
     tags = Tag.objects.filter(id=movie_id)
     link = Link.objects.get(movie=movie)
@@ -26,8 +26,7 @@ def rater_view(request, rater_id):
 
 
 def top_movie_view(request):
-    avg_ratings = [mean(Rating.objects.filter(movie=movie)) for movie in Movie.objects.all()]
-    avg_ratings.sort(key=lambda rating: rating.rating, reverse=True)
-    context = {"top_ratings": avg_ratings[:20]}
+    top_movies = Movie.objects.all().order_by("-average_rating")[:20]
+    context = {"top_movies": top_movies}
     return render_to_response("top_movies.html", context)
 
