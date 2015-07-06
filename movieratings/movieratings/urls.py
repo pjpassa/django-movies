@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic.edit import CreateView
+from django.contrib.auth.forms import UserCreationForm
 from ratings.views import movie_view, rater_view, top_movie_view
 
 urlpatterns = [
+    url(r'^register/', CreateView.as_view(template_name='register.html',
+                                             form_class=UserCreationForm,
+                                             success_url='/')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^$', top_movie_view, name="top_movies"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^movie/(?P<movie_id>\d+)', movie_view, name="movie"),

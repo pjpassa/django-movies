@@ -1,5 +1,7 @@
 from django.contrib import admin
 from ratings.models import Link, Rater, Movie, Rating, Tag, Movie_Genre
+from django.contrib.auth.models import User
+
 
 # Register your models here.
 admin.site.register(Rater)
