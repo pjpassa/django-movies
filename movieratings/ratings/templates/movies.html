@@ -18,8 +18,19 @@
 
     <h3>Average rating of {{ avg_rating }} / 5</h3>
     <div></div>
-    {% if rating %}
-        <div>You rated this movie {{ rating.rating }} / 5</div>
+    {% if form %}
+        {% if rating %}
+            <div>You rated this movie {{ rating.rating }} / 5</div>
+            <form method="post">
+                {% csrf_token %}
+                <input type="submit" name="delete" value="Delete Rating"/>
+            </form>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" name="rate" value="Rate"/>
+        </form>
     {% endif %}
 
     <h3>User Tags</h3>

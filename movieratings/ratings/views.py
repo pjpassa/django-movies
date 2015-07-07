@@ -1,19 +1,33 @@
+from datetime import datetime
+from statistics import mean
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from ratings.forms import RatingForm
 from ratings.models import Link, Movie, Rating, Movie_Genre, Tag, Rater
-from statistics import mean
 
 
 # Create your views here.
 def movie_view(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
-    avg_rating = round(movie.average_rating, 1)
     genres = Movie_Genre.objects.filter(movie=movie)
     tags = Tag.objects.filter(id=movie_id)
     link = Link.objects.get(movie=movie)
+    if request.POST:
+        if "delete" in request.POST:
+            Rating.objects.get(movie=movie, rater=request.user.rater).delete()
+        else:
+            Rating.objects.get_or_create(movie=movie, rater=request.user.rater,
+                                         defaults={"rating": request.POST["rating"],
+                                                   "timestamp": int(datetime.now().timestamp())})
+        movie.calculate_average_rating()
+    avg_rating = round(movie.average_rating, 1)
     context = {"movie": movie, "tags": tags, "genres": genres, "link": link, "avg_rating": avg_rating}
     if request.user:
-        context["rating"] = Rating.objects.get(movie=movie, rater=request.user.rater)
+        rating = Rating.objects.filter(movie=movie, rater=request.user.rater)
+        context["form"] = RatingForm()
+        if rating:
+            context["rating"] = rating[0]
+            context["form"].rating = rating[0]
     return render_to_response("movies.html", context, context_instance=RequestContext(request))
 
 

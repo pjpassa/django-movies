@@ -1,3 +1,4 @@
+from statistics import mean
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -17,6 +18,12 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+
+    def calculate_average_rating(self):
+        ratings = [rating.rating for rating in Rating.objects.filter(movie=self)]
+        if ratings:
+            self.average_rating = mean(ratings)
+            self.save()
 
 
 class Link(models.Model):
